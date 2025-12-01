@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Template Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="editor">
+        <h2>Editor</h2>
+
+        <label>Title</label>
+        <input type="text" id="titleInput" placeholder="Enter title">
+
+        <label>Body Text</label>
+        <textarea id="bodyInput" placeholder="Enter body text"></textarea>
+
+        <label>Button Text</label>
+        <input type="text" id="btnTextInput" placeholder="Button text">
+
+        <label>Button Link</label>
+        <input type="text" id="btnLinkInput" placeholder="https://example.com">
+
+        <label>Select Image</label>
+        <select id="imageSelect">
+            <option value="">None</option>
+            <option value="https://via.placeholder.com/600x200">Banner 1</option>
+            <option value="https://via.placeholder.com/500x150">Banner 2</option>
+        </select>
+
+        <button id="saveBtn">Save Template</button>
+    </div>
+
+    <div class="preview">
+        <h2>Preview</h2>
+        <div id="emailPreview" class="email-box">
+            <img id="previewImage" style="display:none;" />
+            <h1 id="previewTitle">Title here</h1>
+            <p id="previewBody">Body text will appear here</p>
+            <a id="previewBtn" href="#" class="btn">Click me</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
