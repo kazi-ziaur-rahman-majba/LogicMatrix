@@ -11,7 +11,11 @@
       <!-- Left: Dark sidebar for adding blocks -->
       <aside class="sidebar" aria-label="Blocks sidebar">
         <div class="sidebar-header">
-          <div class="sidebar-title">Blocks</div>
+          <div class="sidebar-title">
+            <img src="/assets/email.png" alt="Email" class="sidebar-title-icon">
+            <span class="sidebar-title-email">Email</span>
+            <span class="sidebar-title-template">Template</span>
+          </div>
         </div>
         
         <!-- Predefined Content Blocks -->
@@ -52,7 +56,8 @@
         <header class="editor-header">
           <div class="editor-title">Email Template Builder</div>
           <div class="editor-actions">
-            <button id="btnSaveTemplate" class="btn btn-primary" type="button">Save Template</button>
+            <button id="btnSaveToDatabase" class="btn btn-primary" type="button">Save to Database</button>
+            <button id="btnSaveTemplate" class="btn btn-ghost" type="button">Save Template</button>
             <button id="btnClear" class="btn btn-ghost" type="button">Clear</button>
           </div>
         </header>
@@ -122,6 +127,34 @@
         </div>
         <div class="modal-footer">
           <button id="btnConfirmSave" class="btn btn-primary" type="button">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save to Database Modal -->
+    <div id="saveToDatabaseModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Save to Database</h3>
+          <button class="modal-close" type="button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Template Name</label>
+            <input type="text" id="databaseTemplateName" class="form-control" placeholder="My Email Template">
+          </div>
+          <div class="form-group">
+            <label>API Endpoint URL</label>
+            <input type="text" id="apiEndpoint" class="form-control" placeholder="https://api.example.com/templates" value="https://api.example.com/templates">
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+              Update this URL to point to your backend API endpoint
+            </div>
+          </div>
+          <div id="databaseSaveStatus" style="margin-top: 12px; padding: 12px; border-radius: 6px; display: none;"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="btnConfirmDatabaseSave" class="btn btn-primary" type="button">Save to Database</button>
+          <button class="btn btn-ghost modal-close" type="button">Cancel</button>
         </div>
       </div>
     </div>

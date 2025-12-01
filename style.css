@@ -143,15 +143,25 @@ body {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #1e293b;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.sidebar-title::before {
-  content: "📦";
-    font-size: 24px;
+.sidebar-title-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.sidebar-title-email {
+  color: #000000;
+}
+
+.sidebar-title-template {
+  color: #F97316;
 }
 
 .sidebar-section {

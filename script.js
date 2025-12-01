@@ -38,7 +38,13 @@ const canvasEl = $("canvas"),
   templateSaveModal = $("templateSaveModal"),
   templateNameInput = $("templateNameInput"),
   btnConfirmSave = $("btnConfirmSave"),
-  savedTemplatesList = $("savedTemplatesList");
+  savedTemplatesList = $("savedTemplatesList"),
+  btnSaveToDatabase = $("btnSaveToDatabase"),
+  saveToDatabaseModal = $("saveToDatabaseModal"),
+  databaseTemplateName = $("databaseTemplateName"),
+  apiEndpoint = $("apiEndpoint"),
+  btnConfirmDatabaseSave = $("btnConfirmDatabaseSave"),
+  databaseSaveStatus = $("databaseSaveStatus");
 
 // Utilities
 const uniqId = (prefix = "b") =>
@@ -1293,7 +1299,7 @@ function createAlignmentControl(value, onChange) {
   return group;
 }
 
-// Export HTML
+// Export HTML - Generate fully email-safe HTML with inline styles and table-based layout
 function generateExportHtml() {
   const escape = (str) => escapeHtml(str ?? "");
   const rowsHtml = blocks
@@ -1360,17 +1366,17 @@ function generateExportHtml() {
         const logo = block.content.logo
           ? `<img src="${escape(
               block.content.logo
-            )}" alt="Logo" style="max-height:40px;width:auto;">`
-          : '<span style="font-weight:600;color:#1f2937;">Logo</span>';
+            )}" alt="Logo" style="max-height:40px;width:auto;border:0;outline:none;text-decoration:none;">`
+          : '<span style="font-weight:600;color:#1f2937;font-family:Arial,Helvetica,sans-serif;">Logo</span>';
         const bg = block.content.backgroundColor || "#ffffff";
         return `<tr>
   <td style="background-color:${bg};padding:16px 24px;border-bottom:1px solid #e5e7eb;">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
       <tr>
-        <td>${logo}</td>
+        <td style="vertical-align:middle;">${logo}</td>
         <td align="right" style="vertical-align:middle;">
-          <a href="#" style="color:#3b82f6;text-decoration:none;margin-left:16px;font-size:14px;">Link 1</a>
-          <a href="#" style="color:#3b82f6;text-decoration:none;margin-left:16px;font-size:14px;">Link 2</a>
+          <a href="#" style="color:#3b82f6;text-decoration:none;margin-left:16px;font-size:14px;font-family:Arial,Helvetica,sans-serif;">Link 1</a>
+          <a href="#" style="color:#3b82f6;text-decoration:none;margin-left:16px;font-size:14px;font-family:Arial,Helvetica,sans-serif;">Link 2</a>
         </td>
       </tr>
     </table>
@@ -1392,7 +1398,13 @@ function generateExportHtml() {
   <td style="background-color:${bg};${bgImage}padding:48px 24px;text-align:center;">
     <h2 style="margin:0 0 12px 0;font-size:28px;font-weight:600;color:#111827;font-family:Arial,Helvetica,sans-serif;">${title}</h2>
     <p style="margin:0 0 20px 0;font-size:16px;color:#4b5563;font-family:Arial,Helvetica,sans-serif;">${subtitle}</p>
-    <a href="${btnUrl}" style="display:inline-block;background-color:#2563EB;color:#ffffff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:500;font-family:Arial,Helvetica,sans-serif;text-decoration:none;">${btnText}</a>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+      <tr>
+        <td>
+          <a href="${btnUrl}" style="display:inline-block;background-color:#2563EB;color:#ffffff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:500;font-family:Arial,Helvetica,sans-serif;text-decoration:none;">${btnText}</a>
+        </td>
+      </tr>
+    </table>
   </td>
 </tr>`;
       }
@@ -1407,7 +1419,13 @@ function generateExportHtml() {
   <td style="background-color:${bg};padding:32px 24px;text-align:center;">
     <h3 style="margin:0 0 12px 0;font-size:22px;font-weight:600;color:${tc};font-family:Arial,Helvetica,sans-serif;">${title}</h3>
     <p style="margin:0 0 20px 0;font-size:14px;color:${tc};font-family:Arial,Helvetica,sans-serif;">${text}</p>
-    <a href="${btnUrl}" style="display:inline-block;background-color:#ffffff;color:${bg};padding:12px 24px;border-radius:6px;font-size:14px;font-weight:500;font-family:Arial,Helvetica,sans-serif;text-decoration:none;">${btnText}</a>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+      <tr>
+        <td>
+          <a href="${btnUrl}" style="display:inline-block;background-color:#ffffff;color:${bg};padding:12px 24px;border-radius:6px;font-size:14px;font-weight:500;font-family:Arial,Helvetica,sans-serif;text-decoration:none;">${btnText}</a>
+        </td>
+      </tr>
+    </table>
   </td>
 </tr>`;
       }
@@ -1426,8 +1444,14 @@ function generateExportHtml() {
   </td>
 </tr>`;
       }
+      if (block.type === "section" || block.type === "two-column") {
+        // Sections and two-column layouts are not fully implemented in export yet
+        // For now, return empty or placeholder
+        return "";
+      }
       return "";
     })
+    .filter((row) => row.trim() !== "")
     .join("\n");
 
   return `<!DOCTYPE html>
@@ -1435,7 +1459,13 @@ function generateExportHtml() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Email template</title>
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+  </style>
+  <![endif]-->
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f3f4f6;">
@@ -1451,6 +1481,107 @@ ${rowsHtml}
   </table>
 </body>
 </html>`;
+}
+
+// Save to Database functions
+function openSaveToDatabaseModal() {
+  if (!blocks.length) {
+    alert("No blocks to save. Please add some blocks first.");
+    return;
+  }
+  if (databaseTemplateName) {
+    databaseTemplateName.value = "";
+  }
+  if (databaseSaveStatus) {
+    databaseSaveStatus.style.display = "none";
+    databaseSaveStatus.innerHTML = "";
+  }
+  openModal(saveToDatabaseModal);
+}
+
+async function saveToDatabase() {
+  const templateName = databaseTemplateName?.value.trim();
+  const endpoint = apiEndpoint?.value.trim();
+
+  if (!templateName) {
+    alert("Please enter a template name");
+    return;
+  }
+
+  if (!endpoint) {
+    alert("Please enter an API endpoint URL");
+    return;
+  }
+
+  try {
+    new URL(endpoint); // Validate URL
+  } catch {
+    alert("Please enter a valid API endpoint URL");
+    return;
+  }
+
+  const html = generateExportHtml();
+  const payload = {
+    name: templateName,
+    html: html,
+    blocks: deepClone(blocks),
+    createdAt: new Date().toISOString(),
+  };
+
+  if (databaseSaveStatus) {
+    databaseSaveStatus.style.display = "block";
+    databaseSaveStatus.style.background = "#dbeafe";
+    databaseSaveStatus.style.color = "#1e40af";
+    databaseSaveStatus.textContent = "Saving to database...";
+  }
+
+  if (btnConfirmDatabaseSave) {
+    btnConfirmDatabaseSave.disabled = true;
+    btnConfirmDatabaseSave.textContent = "Saving...";
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json().catch(() => ({}));
+
+    if (databaseSaveStatus) {
+      databaseSaveStatus.style.background = "#d1fae5";
+      databaseSaveStatus.style.color = "#065f46";
+      databaseSaveStatus.textContent = `✓ Successfully saved to database! ${
+        result.id ? `ID: ${result.id}` : ""
+      }`;
+    }
+
+    setTimeout(() => {
+      closeModal(saveToDatabaseModal);
+      if (databaseTemplateName) {
+        databaseTemplateName.value = "";
+      }
+    }, 2000);
+  } catch (error) {
+    console.error("Error saving to database:", error);
+    if (databaseSaveStatus) {
+      databaseSaveStatus.style.background = "#fee2e2";
+      databaseSaveStatus.style.color = "#991b1b";
+      databaseSaveStatus.textContent = `✗ Error: ${error.message}. Please check your API endpoint and try again.`;
+    }
+  } finally {
+    if (btnConfirmDatabaseSave) {
+      btnConfirmDatabaseSave.disabled = false;
+      btnConfirmDatabaseSave.textContent = "Save to Database";
+    }
+  }
 }
 
 // Template management
@@ -1596,6 +1727,10 @@ function setupEventListeners() {
     saveTemplateButton.addEventListener("click", saveTemplate);
   btnConfirmSave &&
     btnConfirmSave.addEventListener("click", confirmSaveTemplate);
+  btnSaveToDatabase &&
+    btnSaveToDatabase.addEventListener("click", openSaveToDatabaseModal);
+  btnConfirmDatabaseSave &&
+    btnConfirmDatabaseSave.addEventListener("click", saveToDatabase);
 
   // Modal close
   document.querySelectorAll(".modal-close").forEach((btn) => {
