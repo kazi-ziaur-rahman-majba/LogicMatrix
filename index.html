@@ -2,50 +2,182 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Email Template Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template Builder - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="dashboard-container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>📧 Email Builder</h1>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#title-section" class="menu-item active" data-section="title-section">
+                    <span class="icon">📝</span>
+                    <span>Title</span>
+                </a>
+                <a href="#body-section" class="menu-item" data-section="body-section">
+                    <span class="icon">📄</span>
+                    <span>Body Text</span>
+                </a>
+                <a href="#button-section" class="menu-item" data-section="button-section">
+                    <span class="icon">🔘</span>
+                    <span>Button</span>
+                </a>
+                <a href="#image-section" class="menu-item" data-section="image-section">
+                    <span class="icon">🖼️</span>
+                    <span>Image</span>
+                </a>
+                <a href="#preview-section" class="menu-item" data-section="preview-section">
+                    <span class="icon">👁️</span>
+                    <span>Preview</span>
+                </a>
+                <a href="#save-section" class="menu-item" data-section="save-section">
+                    <span class="icon">💾</span>
+                    <span>Save Template</span>
+                </a>
+            </nav>
+        </aside>
 
-<div class="container">
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Email Template Builder</h2>
+                <p>Design your email template step by step</p>
+            </header>
 
-    <div class="editor">
-        <h2>Editor</h2>
+            <!-- Title Section -->
+            <section id="title-section" class="content-section active">
+                <div class="section-header">
+                    <h3>📝 Title Section</h3>
+                    <p>Enter the main title and subject for your email</p>
+                </div>
+                <div class="form-group">
+                    <label for="subjectInput">Email Subject</label>
+                    <input type="text" id="subjectInput" placeholder="Enter email subject..." class="form-control">
+                    <small class="form-hint">This will appear in the email subject line</small>
+                </div>
+                <div class="form-group">
+                    <label for="titleInput">Email Title</label>
+                    <input type="text" id="titleInput" placeholder="Enter your email title..." class="form-control">
+                    <small class="form-hint">This will appear as the main heading in your email</small>
+                </div>
+            </section>
 
-        <label>Title</label>
-        <input type="text" id="titleInput" placeholder="Enter title">
+            <!-- Body Text Section -->
+            <section id="body-section" class="content-section">
+                <div class="section-header">
+                    <h3>📄 Body Text Section</h3>
+                    <p>Add the main content of your email</p>
+                </div>
+                <div class="form-group">
+                    <label for="bodyInput">Email Body</label>
+                    <textarea id="bodyInput" placeholder="Enter your email body text..." class="form-control" rows="6"></textarea>
+                    <small class="form-hint">Write the main message content for your email</small>
+                </div>
+            </section>
 
-        <label>Body Text</label>
-        <textarea id="bodyInput" placeholder="Enter body text"></textarea>
+            <!-- Button Section -->
+            <section id="button-section" class="content-section">
+                <div class="section-header">
+                    <h3>🔘 Button Section</h3>
+                    <p>Configure your call-to-action button</p>
+                </div>
+                <div class="form-group">
+                    <label for="btnTextInput">Button Text</label>
+                    <input type="text" id="btnTextInput" placeholder="Click Here" class="form-control">
+                    <small class="form-hint">The text displayed on the button</small>
+                </div>
+                <div class="form-group">
+                    <label for="btnLinkInput">Button Link (URL)</label>
+                    <input type="url" id="btnLinkInput" placeholder="https://example.com" class="form-control">
+                    <small class="form-hint">The URL where the button will link to</small>
+                </div>
+            </section>
 
-        <label>Button Text</label>
-        <input type="text" id="btnTextInput" placeholder="Button text">
+            <!-- Image Section -->
+            <section id="image-section" class="content-section">
+                <div class="section-header">
+                    <h3>🖼️ Image Section</h3>
+                    <p>Select an image to include in your email</p>
+                </div>
+                <div class="form-group">
+                    <label for="imageSelect">Choose Image</label>
+                    <select id="imageSelect" class="form-control">
+                        <option value="">No Image</option>
+                        <option value="https://via.placeholder.com/600x200/4A90E2/FFFFFF?text=Email+Banner+1">Banner 1 - Blue</option>
+                        <option value="https://via.placeholder.com/600x200/E94B3C/FFFFFF?text=Email+Banner+2">Banner 2 - Red</option>
+                        <option value="https://via.placeholder.com/600x200/50C878/FFFFFF?text=Email+Banner+3">Banner 3 - Green</option>
+                        <option value="https://via.placeholder.com/600x200/FFA500/FFFFFF?text=Email+Banner+4">Banner 4 - Orange</option>
+                        <option value="https://via.placeholder.com/600x200/9B59B6/FFFFFF?text=Email+Banner+5">Banner 5 - Purple</option>
+                    </select>
+                    <small class="form-hint">Select an image from the dropdown to add it to your email</small>
+                </div>
+            </section>
 
-        <label>Button Link</label>
-        <input type="text" id="btnLinkInput" placeholder="https://example.com">
+            <!-- Preview Section -->
+            <section id="preview-section" class="content-section">
+                <div class="section-header">
+                    <h3>👁️ Live Preview</h3>
+                    <p>See how your email template looks in real-time</p>
+                </div>
+                <div class="preview-container">
+                    <!-- Email Client Simulation -->
+                    <div class="email-client-wrapper">
+                        <div class="email-client-header">
+                            <div class="email-client-controls">
+                                <span class="email-control"></span>
+                                <span class="email-control"></span>
+                                <span class="email-control"></span>
+                            </div>
+                            <div class="email-client-title">Email Preview</div>
+                        </div>
+                        <div class="email-inbox-header">
+                            <div class="email-from">
+                                <strong>From:</strong> <span>your-email@example.com</span>
+                            </div>
+                            <div class="email-to">
+                                <strong>To:</strong> <span>recipient@example.com</span>
+                            </div>
+                            <div class="email-subject">
+                                <strong>Subject:</strong> <span id="previewSubject">Your Email Subject</span>
+                            </div>
+                        </div>
+                        <div id="emailPreview" class="email-preview">
+                            <div class="email-content">
+                                <img id="previewImage" class="preview-image" style="display:none;" alt="Email banner">
+                                <h1 id="previewTitle" class="preview-title">Your Title Here</h1>
+                                <div id="previewBody" class="preview-body">Your body text will appear here...</div>
+                                <div class="button-wrapper">
+                                    <a id="previewBtn" href="#" class="preview-button">Button Text</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <label>Select Image</label>
-        <select id="imageSelect">
-            <option value="">None</option>
-            <option value="https://via.placeholder.com/600x200">Banner 1</option>
-            <option value="https://via.placeholder.com/500x150">Banner 2</option>
-        </select>
-
-        <button id="saveBtn">Save Template</button>
+            <!-- Save Section -->
+            <section id="save-section" class="content-section">
+                <div class="section-header">
+                    <h3>💾 Save Template</h3>
+                    <p>Save your email template to the database</p>
+                </div>
+                <div class="form-group">
+                    <label for="templateName">Template Name</label>
+                    <input type="text" id="templateName" placeholder="My Email Template" class="form-control">
+                    <small class="form-hint">Give your template a name for easy identification</small>
+                </div>
+                <button id="saveBtn" class="btn-save">💾 Save Template to Database</button>
+                <div id="saveStatus" class="save-status"></div>
+                <div id="savedTemplates" class="saved-templates"></div>
+            </section>
+        </main>
     </div>
 
-    <div class="preview">
-        <h2>Preview</h2>
-        <div id="emailPreview" class="email-box">
-            <img id="previewImage" style="display:none;" />
-            <h1 id="previewTitle">Title here</h1>
-            <p id="previewBody">Body text will appear here</p>
-            <a id="previewBtn" href="#" class="btn">Click me</a>
-        </div>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
