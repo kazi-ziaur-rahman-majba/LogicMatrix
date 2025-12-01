@@ -215,6 +215,13 @@ body {
   font-size: 18px;
 }
 
+.sidebar-icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+}
+
 .sidebar-block-btn-icon.button-icon {
   border-radius: 50%;
   font-size: 16px;
