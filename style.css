@@ -1,15 +1,3 @@
-/* 
- * Email Template Builder - Advanced
- * Comprehensive WordPress-style layout with rich text editing, sections, and advanced features
- */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-/* Custom Scrollbar Styling */
 * {
   scrollbar-width: thin;
   scrollbar-color: #f97316 #f1f5f9;
