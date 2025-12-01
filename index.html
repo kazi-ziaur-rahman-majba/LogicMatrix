@@ -15,73 +15,35 @@
         </div>
         
         <!-- Predefined Content Blocks -->
-        <div class="sidebar-section">
+        <div class="sidebar-section predefined-section">
           <div class="sidebar-section-title">PREDEFINED</div>
           <div class="sidebar-blocks">
-            <button class="sidebar-block-btn" type="button" data-block-type="header">
-              <span class="sidebar-block-btn-icon">H</span>
-              <span>Header</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="hero">
-              <span class="sidebar-block-btn-icon">★</span>
-              <span>Hero</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="cta">
-              <span class="sidebar-block-btn-icon">CTA</span>
-              <span class="cta-section-text">CTA Section</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="footer">
-              <span class="sidebar-block-btn-icon">F</span>
-              <span>Footer</span>
-            </button>
+            <button class="sidebar-block-btn predefined-block-btn" type="button" data-block-type="header"><span class="sidebar-block-btn-icon predefined-icon">H</span><span>Header</span></button>
+            <button class="sidebar-block-btn predefined-block-btn" type="button" data-block-type="hero"><span class="sidebar-block-btn-icon predefined-icon">★</span><span>Hero</span></button>
+            <button class="sidebar-block-btn predefined-block-btn" type="button" data-block-type="cta"><span class="sidebar-block-btn-icon predefined-icon">CTA</span><span class="cta-section-text">CTA Section</span></button>
+            <button class="sidebar-block-btn predefined-block-btn" type="button" data-block-type="footer"><span class="sidebar-block-btn-icon predefined-icon">F</span><span>Footer</span></button>
           </div>
         </div>
 
         <!-- Basic Content Blocks -->
-        <div class="sidebar-section">
+        <div class="sidebar-section content-section">
           <div class="sidebar-section-title">CONTENT</div>
           <div class="sidebar-blocks">
-            <button class="sidebar-block-btn" type="button" data-block-type="title">
-              <span class="sidebar-block-btn-icon">T</span>
-              <span>Title</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="subtitle">
-              <span class="sidebar-block-btn-icon">S</span>
-              <span>Subtitle</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="paragraph">
-              <span class="sidebar-block-btn-icon">1</span>
-              <span>Paragraph</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="image">
-              <span class="sidebar-block-btn-icon image-icon">⛰</span>
-              <span>Image</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="button">
-              <span class="sidebar-block-btn-icon button-icon">◎</span>
-              <span>Button</span>
-            </button>
+            <button class="sidebar-block-btn content-block-btn" type="button" data-block-type="title"><span class="sidebar-block-btn-icon content-icon">T</span><span>Title</span></button>
+            <button class="sidebar-block-btn content-block-btn" type="button" data-block-type="subtitle"><span class="sidebar-block-btn-icon content-icon">S</span><span>Subtitle</span></button>
+            <button class="sidebar-block-btn content-block-btn" type="button" data-block-type="paragraph"><span class="sidebar-block-btn-icon content-icon">1</span><span>Paragraph</span></button>
+            <button class="sidebar-block-btn content-block-btn" type="button" data-block-type="image"><span class="sidebar-block-btn-icon content-icon image-icon">⛰</span><span>Image</span></button>
+            <button class="sidebar-block-btn content-block-btn" type="button" data-block-type="button"><span class="sidebar-block-btn-icon content-icon button-icon">◎</span><span>Button</span></button>
           </div>
         </div>
 
         <!-- Layout Blocks -->
-        <div class="sidebar-section">
+        <div class="sidebar-section layout-section">
           <div class="sidebar-section-title">LAYOUT</div>
           <div class="sidebar-blocks">
-            <button class="sidebar-block-btn" type="button" data-block-type="section">
-              <span class="sidebar-block-btn-icon grid-icon">▦</span>
-              <span>Section</span>
-            </button>
-            <button class="sidebar-block-btn" type="button" data-block-type="two-column">
-              <span class="sidebar-block-btn-icon columns-icon">▥</span>
-              <span>2 Columns</span>
-            </button>
+            <button class="sidebar-block-btn layout-block-btn" type="button" data-block-type="section"><span class="sidebar-block-btn-icon layout-icon grid-icon">▦</span><span>Section</span></button>
+            <button class="sidebar-block-btn layout-block-btn" type="button" data-block-type="two-column"><span class="sidebar-block-btn-icon layout-icon columns-icon">▥</span><span>2 Columns</span></button>
           </div>
-        </div>
-
-        <div class="sidebar-footer">
-          <div><strong>Email Builder</strong></div>
-          <div>Drag blocks to reorder</div>
         </div>
       </aside>
 
@@ -90,11 +52,7 @@
         <header class="editor-header">
           <div class="editor-title">Email Template Builder</div>
           <div class="editor-actions">
-            <button id="btnUndo" class="btn btn-ghost" type="button" title="Undo">↶</button>
-            <button id="btnRedo" class="btn btn-ghost" type="button" title="Redo">↷</button>
-            <button id="btnCodeView" class="btn btn-ghost" type="button">Code View</button>
-            <button id="btnExportHtml" class="btn btn-primary" type="button">Export HTML</button>
-            <button id="btnSaveTemplate" class="btn btn-ghost" type="button">Save Template</button>
+            <button id="btnSaveTemplate" class="btn btn-primary" type="button">Save Template</button>
             <button id="btnClear" class="btn btn-ghost" type="button">Clear</button>
           </div>
         </header>
@@ -148,25 +106,6 @@
       </aside>
     </div>
 
-    <!-- Image Library Modal -->
-    <div id="imageLibraryModal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Image Library</h3>
-          <button class="modal-close" type="button">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="image-upload-area">
-            <input type="file" id="imageUploadInput" accept="image/*" multiple style="display: none;">
-            <button id="btnUploadImage" class="btn btn-primary" type="button">Upload Images</button>
-            <input type="url" id="imageUrlInput" class="form-control" placeholder="Or enter image URL">
-            <button id="btnAddUrlImage" class="btn btn-ghost" type="button">Add from URL</button>
-          </div>
-          <div id="imageLibraryGrid" class="image-library-grid"></div>
-        </div>
-      </div>
-    </div>
-
     <!-- Template Save Modal -->
     <div id="templateSaveModal" class="modal" style="display: none;">
       <div class="modal-content">
@@ -183,7 +122,6 @@
         </div>
         <div class="modal-footer">
           <button id="btnConfirmSave" class="btn btn-primary" type="button">Save</button>
-          <button class="btn btn-ghost modal-close" type="button">Cancel</button>
         </div>
       </div>
     </div>
