@@ -1,183 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Template Builder - Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="dashboard-container">
-        <!-- Sidebar Menu -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1>📧 Email Builder</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Template Builder - Advanced</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Left: Dark sidebar for adding blocks -->
+      <aside class="sidebar" aria-label="Blocks sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">Blocks</div>
+        </div>
+        
+        <!-- Predefined Content Blocks -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Predefined</div>
+          <div class="sidebar-blocks">
+            <button class="sidebar-block-btn" type="button" data-block-type="header">
+              <span class="sidebar-block-btn-icon">H</span>
+              <span>Header</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="hero">
+              <span class="sidebar-block-btn-icon">★</span>
+              <span>Hero</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="cta">
+              <span class="sidebar-block-btn-icon">CTA</span>
+              <span>CTA Section</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="footer">
+              <span class="sidebar-block-btn-icon">F</span>
+              <span>Footer</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Basic Content Blocks -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Content</div>
+          <div class="sidebar-blocks">
+            <button class="sidebar-block-btn" type="button" data-block-type="title">
+              <span class="sidebar-block-btn-icon">T</span>
+              <span>Title</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="subtitle">
+              <span class="sidebar-block-btn-icon">S</span>
+              <span>Subtitle</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="paragraph">
+              <span class="sidebar-block-btn-icon">¶</span>
+              <span>Paragraph</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="image">
+              <span class="sidebar-block-btn-icon">🖼</span>
+              <span>Image</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="button">
+              <span class="sidebar-block-btn-icon">◎</span>
+              <span>Button</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Layout Blocks -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Layout</div>
+          <div class="sidebar-blocks">
+            <button class="sidebar-block-btn" type="button" data-block-type="section">
+              <span class="sidebar-block-btn-icon">▦</span>
+              <span>Section</span>
+            </button>
+            <button class="sidebar-block-btn" type="button" data-block-type="two-column">
+              <span class="sidebar-block-btn-icon">▥</span>
+              <span>2 Columns</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div><strong>Email Builder</strong></div>
+          <div>Drag blocks to reorder</div>
+        </div>
+      </aside>
+
+      <!-- Center: Editor / live preview area -->
+      <main class="editor" aria-label="Email editor">
+        <header class="editor-header">
+          <div class="editor-title">Email Template Builder</div>
+          <div class="editor-actions">
+            <button id="btnUndo" class="btn btn-ghost" type="button" title="Undo">↶</button>
+            <button id="btnRedo" class="btn btn-ghost" type="button" title="Redo">↷</button>
+            <button id="btnCodeView" class="btn btn-ghost" type="button">Code View</button>
+            <button id="btnExportHtml" class="btn btn-primary" type="button">Export HTML</button>
+            <button id="btnSaveTemplate" class="btn btn-ghost" type="button">Save Template</button>
+            <button id="btnClear" class="btn btn-ghost" type="button">Clear</button>
+          </div>
+        </header>
+
+        <!-- Code Editor View (hidden by default) -->
+        <div id="codeEditorView" class="code-editor-view" style="display: none;">
+          <div class="code-editor-header">
+            <span>HTML Code Editor</span>
+            <button id="btnCloseCodeView" class="btn btn-ghost" type="button">Close</button>
+          </div>
+          <textarea id="htmlCodeEditor" class="html-code-editor"></textarea>
+          <div class="code-editor-actions">
+            <button id="btnApplyCode" class="btn btn-primary" type="button">Apply Changes</button>
+            <button id="btnResetCode" class="btn btn-ghost" type="button">Reset</button>
+          </div>
+        </div>
+
+        <!-- Canvas View -->
+        <section class="canvas-wrap" aria-label="Email preview canvas">
+          <div class="canvas-inner">
+            <div class="email-frame">
+              <div class="email-body">
+                <div id="canvas"></div>
+                <div id="emptyState" class="empty-state">
+                  Start by adding a block from the left sidebar. You can drag blocks to reorder them.
+                </div>
+              </div>
             </div>
-            <nav class="sidebar-menu">
-                <a href="#title-section" class="menu-item active" data-section="title-section">
-                    <span class="icon">📝</span>
-                    <span>Title</span>
-                </a>
-                <a href="#body-section" class="menu-item" data-section="body-section">
-                    <span class="icon">📄</span>
-                    <span>Body Text</span>
-                </a>
-                <a href="#button-section" class="menu-item" data-section="button-section">
-                    <span class="icon">🔘</span>
-                    <span>Button</span>
-                </a>
-                <a href="#image-section" class="menu-item" data-section="image-section">
-                    <span class="icon">🖼️</span>
-                    <span>Image</span>
-                </a>
-                <a href="#preview-section" class="menu-item" data-section="preview-section">
-                    <span class="icon">👁️</span>
-                    <span>Preview</span>
-                </a>
-                <a href="#save-section" class="menu-item" data-section="save-section">
-                    <span class="icon">💾</span>
-                    <span>Save Template</span>
-                </a>
-            </nav>
-        </aside>
+          </div>
+        </section>
 
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <header class="content-header">
-                <h2>Email Template Builder</h2>
-                <p>Design your email template step by step</p>
-            </header>
+        <!-- Auto-save indicator -->
+        <div id="autoSaveIndicator" class="auto-save-indicator">Saved</div>
+      </main>
 
-            <!-- Title Section -->
-            <section id="title-section" class="content-section active">
-                <div class="section-header">
-                    <h3>📝 Title Section</h3>
-                    <p>Enter the main title and subject for your email</p>
-                </div>
-                <div class="form-group">
-                    <label for="subjectInput">Email Subject</label>
-                    <input type="text" id="subjectInput" placeholder="Enter email subject..." class="form-control">
-                    <small class="form-hint">This will appear in the email subject line</small>
-                </div>
-                <div class="form-group">
-                    <label for="titleInput">Email Title</label>
-                    <input type="text" id="titleInput" placeholder="Enter your email title..." class="form-control">
-                    <small class="form-hint">This will appear as the main heading in your email</small>
-                </div>
-            </section>
+      <!-- Right: Settings panel for selected element -->
+      <aside class="settings-panel" aria-label="Block settings">
+        <div class="settings-header">
+          <div>
+            <div class="settings-title">Block Settings</div>
+            <div class="settings-subtitle" id="settingsSubtitle">
+              Select a block to edit its properties.
+            </div>
+          </div>
+        </div>
+        <div id="settingsContent" class="settings-content">
+          <div class="settings-empty">
+            No block selected. Click any block in the email preview to edit its content and style.
+          </div>
+        </div>
+      </aside>
+    </div>
 
-            <!-- Body Text Section -->
-            <section id="body-section" class="content-section">
-                <div class="section-header">
-                    <h3>📄 Body Text Section</h3>
-                    <p>Add the main content of your email</p>
-                </div>
-                <div class="form-group">
-                    <label for="bodyInput">Email Body</label>
-                    <textarea id="bodyInput" placeholder="Enter your email body text..." class="form-control" rows="6"></textarea>
-                    <small class="form-hint">Write the main message content for your email</small>
-                </div>
-            </section>
+    <!-- Image Library Modal -->
+    <div id="imageLibraryModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Image Library</h3>
+          <button class="modal-close" type="button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="image-upload-area">
+            <input type="file" id="imageUploadInput" accept="image/*" multiple style="display: none;">
+            <button id="btnUploadImage" class="btn btn-primary" type="button">Upload Images</button>
+            <input type="url" id="imageUrlInput" class="form-control" placeholder="Or enter image URL">
+            <button id="btnAddUrlImage" class="btn btn-ghost" type="button">Add from URL</button>
+          </div>
+          <div id="imageLibraryGrid" class="image-library-grid"></div>
+        </div>
+      </div>
+    </div>
 
-            <!-- Button Section -->
-            <section id="button-section" class="content-section">
-                <div class="section-header">
-                    <h3>🔘 Button Section</h3>
-                    <p>Configure your call-to-action button</p>
-                </div>
-                <div class="form-group">
-                    <label for="btnTextInput">Button Text</label>
-                    <input type="text" id="btnTextInput" placeholder="Click Here" class="form-control">
-                    <small class="form-hint">The text displayed on the button</small>
-                </div>
-                <div class="form-group">
-                    <label for="btnLinkInput">Button Link (URL)</label>
-                    <input type="url" id="btnLinkInput" placeholder="https://example.com" class="form-control">
-                    <small class="form-hint">The URL where the button will link to</small>
-                </div>
-            </section>
-
-            <!-- Image Section -->
-            <section id="image-section" class="content-section">
-                <div class="section-header">
-                    <h3>🖼️ Image Section</h3>
-                    <p>Select an image to include in your email</p>
-                </div>
-                <div class="form-group">
-                    <label for="imageSelect">Choose Image</label>
-                    <select id="imageSelect" class="form-control">
-                        <option value="">No Image</option>
-                        <option value="https://via.placeholder.com/600x200/4A90E2/FFFFFF?text=Email+Banner+1">Banner 1 - Blue</option>
-                        <option value="https://via.placeholder.com/600x200/E94B3C/FFFFFF?text=Email+Banner+2">Banner 2 - Red</option>
-                        <option value="https://via.placeholder.com/600x200/50C878/FFFFFF?text=Email+Banner+3">Banner 3 - Green</option>
-                        <option value="https://via.placeholder.com/600x200/FFA500/FFFFFF?text=Email+Banner+4">Banner 4 - Orange</option>
-                        <option value="https://via.placeholder.com/600x200/9B59B6/FFFFFF?text=Email+Banner+5">Banner 5 - Purple</option>
-                    </select>
-                    <small class="form-hint">Select an image from the dropdown to add it to your email</small>
-                </div>
-            </section>
-
-            <!-- Preview Section -->
-            <section id="preview-section" class="content-section">
-                <div class="section-header">
-                    <h3>👁️ Live Preview</h3>
-                    <p>See how your email template looks in real-time</p>
-                </div>
-                <div class="preview-container">
-                    <!-- Email Client Simulation -->
-                    <div class="email-client-wrapper">
-                        <div class="email-client-header">
-                            <div class="email-client-controls">
-                                <span class="email-control"></span>
-                                <span class="email-control"></span>
-                                <span class="email-control"></span>
-                            </div>
-                            <div class="email-client-title">Email Preview</div>
-                        </div>
-                        <div class="email-inbox-header">
-                            <div class="email-from">
-                                <strong>From:</strong> <span>your-email@example.com</span>
-                            </div>
-                            <div class="email-to">
-                                <strong>To:</strong> <span>recipient@example.com</span>
-                            </div>
-                            <div class="email-subject">
-                                <strong>Subject:</strong> <span id="previewSubject">Your Email Subject</span>
-                            </div>
-                        </div>
-                        <div id="emailPreview" class="email-preview">
-                            <div class="email-content">
-                                <img id="previewImage" class="preview-image" style="display:none;" alt="Email banner">
-                                <h1 id="previewTitle" class="preview-title">Your Title Here</h1>
-                                <div id="previewBody" class="preview-body">Your body text will appear here...</div>
-                                <div class="button-wrapper">
-                                    <a id="previewBtn" href="#" class="preview-button">Button Text</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Save Section -->
-            <section id="save-section" class="content-section">
-                <div class="section-header">
-                    <h3>💾 Save Template</h3>
-                    <p>Save your email template to the database</p>
-                </div>
-                <div class="form-group">
-                    <label for="templateName">Template Name</label>
-                    <input type="text" id="templateName" placeholder="My Email Template" class="form-control">
-                    <small class="form-hint">Give your template a name for easy identification</small>
-                </div>
-                <button id="saveBtn" class="btn-save">💾 Save Template to Database</button>
-                <div id="saveStatus" class="save-status"></div>
-                <div id="savedTemplates" class="saved-templates"></div>
-            </section>
-        </main>
+    <!-- Template Save Modal -->
+    <div id="templateSaveModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Save Template</h3>
+          <button class="modal-close" type="button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Template Name</label>
+            <input type="text" id="templateNameInput" class="form-control" placeholder="My Email Template">
+          </div>
+          <div id="savedTemplatesList" class="saved-templates-list"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="btnConfirmSave" class="btn btn-primary" type="button">Save</button>
+          <button class="btn btn-ghost modal-close" type="button">Cancel</button>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
